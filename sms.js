@@ -14,7 +14,7 @@ console.log(apikey)
 const AfricasTalking = require('africastalking')(credentials);
 
 // Get the SMS service
-const sms = AfricasTalking.SMS;
+// const sms = AfricasTalking.SMS;
 
 function sendMessage() {
     const options = {
@@ -23,7 +23,7 @@ function sendMessage() {
         // Set your message
         message: "Thank you for downloading music from our app. ",
         // Set your shortCode or senderId
-        from: ' '
+        from: ''
     }
 
     // That’s it, hit send and we’ll take care of the rest
