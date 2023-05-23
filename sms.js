@@ -7,14 +7,12 @@ const credentials = {
     apiKey: apikey,
     username: 'deltabk',
 }
-
-console.log(apikey)
-
+ 
 // Initialize the SDK
 const AfricasTalking = require('africastalking')(credentials);
 
 // Get the SMS service
-// const sms = AfricasTalking.SMS;
+const sms = AfricasTalking.SMS;
 
 function sendMessage() {
     const options = {
