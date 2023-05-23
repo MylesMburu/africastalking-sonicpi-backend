@@ -37,3 +37,5 @@ function initiateMobileCheckout() {
 }
 
 initiateMobileCheckout();
+
+// document.getElementById('yourButtonId').addEventListener('click', initiateMobileCheckout);
