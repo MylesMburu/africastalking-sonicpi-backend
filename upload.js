@@ -18,10 +18,11 @@ const AfricasTalking = require('africastalking')(credentials);
 
 // Get the SMS service
 const sms = AfricasTalking.SMS;
+const firebaseApi = process.env.FIREBASE_API
 
 // Your Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBIxo5ybK7tIzXXNgpZPd63Hab5HwZUats",
+    apiKey: firebaseApi,
     authDomain: "groovehub254.firebaseapp.com",
     projectId: "groovehub254",
     storageBucket: "groovehub254.appspot.com",
@@ -56,19 +57,9 @@ app.post('/upload', upload.single('beat-file'), (req, res) => {
 
     // Get a reference to the storage location where you want to upload the MP3 file
     const storageRef = ref(storage, 'beats/' + file.originalname);
-    
-    const metadata = {
-        contentType: file.mimetype, // you can set the content type of the file
-        customMetadata: {
-          'beat-name': req.body['beat-name'],
-          'beat-description': req.body['beat-description'],
-          'beat-price': req.body['beat-price'],
-          
-        },
-      };
-  
-      // Upload the file to Firebase Storage with the metadata
-      const uploadTask = uploadBytesResumable(storageRef, file.buffer, metadata);
+
+    // Upload the file to Firebase Storage
+    const uploadTask = uploadBytesResumable(storageRef, file.buffer);
 
     // Monitor the upload progress
     uploadTask.on('state_changed',
@@ -93,7 +84,7 @@ app.post('/upload', upload.single('beat-file'), (req, res) => {
             // Perform further actions with the download URL if needed
             
             // Call the `sendMessage` function with the `downloadURL`
-            // sendMessage(downloadURL);
+            sendMessage(downloadURL);
 
             res.status(200).json({ downloadURL });
           })
@@ -118,9 +109,9 @@ app.listen(3000, () => {
 function sendMessage(downloadURL) {
   const options = {
     // Set the numbers you want to send to in international format
-    to: ['+254759248886'],
+    to: ['+254746594833'],
     // Set your message
-    message: `Thank you for uploading music using our app. Here is the download link: ${downloadURL}`,
+    message: `Thank you for downloading music from our app. Here is the download link: ${downloadURL}`,
     // Set your shortCode or senderId
     from: '',
   };
